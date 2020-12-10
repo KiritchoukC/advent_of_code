@@ -1,17 +1,17 @@
 ﻿
-namespace day6
+namespace Aoc.Day6
 {
     using System;
 
-    public class Program
-    {
-        private static string filePath = "./input.txt";
+    using Aoc.Misc;
 
+    class Program
+    {
         static void Main(string[] _) =>
-            filePath
+            "input.txt"
                 .Apply(Part1.Solve)
                 .Apply(Console.WriteLine)
-                .Apply(_ => filePath)
+                .Apply(_ => "input.txt")
                 .Apply(Part2.Solve)
                 .Apply(Console.WriteLine);
     }

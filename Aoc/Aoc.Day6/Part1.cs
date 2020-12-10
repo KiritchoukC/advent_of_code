@@ -1,10 +1,12 @@
 ﻿
-namespace day6
+namespace Aoc.Day6
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Tools;
+    using Aoc.Misc;
+
+    using static Misc.Tools;
 
     public static class Part1
     {
@@ -15,7 +17,7 @@ namespace day6
                 .Aggregate((acc, val) => $"{acc}{val}");
 
         public static int Solve(string path) =>
-            ReadFile(path)
+            ReadLines(path)
                 .SplitBy(x => x == "")
                 .Select(Distinct)
                 .Select(x => x.Length)

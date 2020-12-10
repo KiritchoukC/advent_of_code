@@ -1,7 +1,10 @@
-﻿using System;
-
-namespace day7
+﻿
+namespace Aoc.Day7
 {
+    using System;
+
+    using Aoc.Misc;
+
     class Program
     {
         static void Main(string[] args) =>

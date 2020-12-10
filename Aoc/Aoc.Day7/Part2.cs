@@ -1,9 +1,11 @@
 ﻿
-namespace day7
+namespace Aoc.Day7
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Aoc.Misc;
 
     public static class Part2
     { 
