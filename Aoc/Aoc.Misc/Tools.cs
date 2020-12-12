@@ -13,6 +13,7 @@ namespace Aoc.Misc
         // Constructors
         public static T[] Arr<T>(params T[] items) => new List<T>(items).ToArray();
         public static List<T> Lst<T>(params T[] items) => new(items);
+        public static KeyValuePair<A, B> Kvp<A, B>(A key, B value) => new(key, value);
 
         // Validators
         public static bool NotNull(object o) => o != null;
