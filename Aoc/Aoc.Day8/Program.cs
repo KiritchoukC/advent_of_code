@@ -10,6 +10,9 @@ namespace Aoc.Day8
         static void Main(string[] _) =>
             "input.txt"
                 .Apply(Part1.Solve)
+                .Apply(Console.WriteLine)
+                .Apply(_ => "input.txt")
+                .Apply(Part2.Solve)
                 .Apply(Console.WriteLine);
     }
 }
