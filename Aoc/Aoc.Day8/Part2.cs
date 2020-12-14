@@ -35,13 +35,13 @@ namespace Aoc.Day8
                 Index > Instructions.Count ? Instruction.OutOfRange() :
                                              Instruction.Terminated();
 
-            public State Accumulate()       => this with { Result = Result + CurrentInstruction.Value };
-            public State Jump()             => this with { Index = Index + CurrentInstruction.Value };
-            public State Next()             => this with { Index = Index + 1 };
-            public State Restart()          => this with { Index = 0, Result = 0, Instructions = InitialInstructions };
-            public State Fix(int index)     => this with { Instructions = Instructions.Select((inst, i) => i == index ? inst.Fix() : inst).ToImmutableList(), FixedIndices = FixedIndices.Add(index) };
-            public State MarkItDone()       => this with { Instructions = Instructions.Select((inst, i) => Index == i ? inst.Done() : inst).ToImmutableList() };
-            public State NextFix()          => Instructions.FindIndex(FixedIndices.Max() + 1, i => i.Action is "jmp" or "nop" && i.Value != 0).Apply(Restart().Fix);
+            public State Accumulate()   => this with { Result = Result + CurrentInstruction.Value };
+            public State Jump()         => this with { Index = Index + CurrentInstruction.Value };
+            public State Next()         => this with { Index = Index + 1 };
+            public State Restart()      => this with { Index = 0, Result = 0, Instructions = InitialInstructions };
+            public State Fix(int index) => this with { Instructions = Instructions.Select((inst, i) => i == index ? inst.Fix() : inst).ToImmutableList(), FixedIndices = FixedIndices.Add(index) };
+            public State Done()         => this with { Instructions = Instructions.Select((inst, i) => Index == i ? inst.Done() : inst).ToImmutableList() };
+            public State NextFix()      => Instructions.FindIndex(FixedIndices.Max() + 1, i => i.Action is "jmp" or "nop" && i.Value != 0).Apply(Restart().Fix);
 
             public static State Init(IEnumerable<Instruction> instructions) =>
                 new(
@@ -59,9 +59,9 @@ namespace Aoc.Day8
         private static int RunRec(State state) =>
             state.CurrentInstruction switch
             {
-                ("nop", _, Status.None)         => state.MarkItDone().Next().Apply(RunRec),
-                ("acc", _, Status.None)         => state.MarkItDone().Accumulate().Next().Apply(RunRec),
-                ("jmp", _, Status.None)         => state.MarkItDone().Jump().Apply(RunRec),
+                ("nop", _, Status.None)         => state.Done().Next().Apply(RunRec),
+                ("acc", _, Status.None)         => state.Done().Accumulate().Next().Apply(RunRec),
+                ("jmp", _, Status.None)         => state.Done().Jump().Apply(RunRec),
                 (_    , _, Status.OutOfRange)   => state.NextFix().Apply(RunRec),
                 (_    , _, Status.Looped)       => state.NextFix().Apply(RunRec),
                 (_    , _, Status.Terminated)   => state.Result,
@@ -77,9 +77,9 @@ namespace Aoc.Day8
             {
                 state = state.CurrentInstruction switch
                 {
-                    ("nop", _, Status.None)         => state.MarkItDone().Next(),
-                    ("acc", _, Status.None)         => state.MarkItDone().Accumulate().Next(),
-                    ("jmp", _, Status.None)         => state.MarkItDone().Jump(),
+                    ("nop", _, Status.None)         => state.Done().Next(),
+                    ("acc", _, Status.None)         => state.Done().Accumulate().Next(),
+                    ("jmp", _, Status.None)         => state.Done().Jump(),
                     (_    , _, Status.OutOfRange)   => state.NextFix(),
                     (_    , _, Status.Looped)       => state.NextFix(),
                     (_    , _, Status.Terminated)   => state,
