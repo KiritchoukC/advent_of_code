@@ -35,21 +35,21 @@ namespace Aoc.Day8
                 Index > Instructions.Count ? Instruction.OutOfRange() :
                                              Instruction.Terminated();
 
-            public State Accumulate() => this with { Result = Result + CurrentInstruction.Value };
-            public State Jump() => this with { Index = Index + CurrentInstruction.Value };
-            public State Next() => this with { Index = Index + 1 };
-            public State Restart() => this with { Index = 0, Result = 0, Instructions = InitialInstructions };
-            public State Fix(int index) => this with { Instructions = Instructions.Select((inst, i) => i == index ? inst.Fix() : inst).ToImmutableList(), FixedIndices = FixedIndices.Add(index) };
-            public State MarkItDone() => this with { Instructions = Instructions.Select((inst, i) => Index == i ? inst.Done() : inst).ToImmutableList() };
-            public State NextFix() => Instructions.FindIndex(FixedIndices.Max() + 1, i => i.Action is "jmp" or "nop" && i.Value != 0).Apply(Restart().Fix);
+            public State Accumulate()       => this with { Result = Result + CurrentInstruction.Value };
+            public State Jump()             => this with { Index = Index + CurrentInstruction.Value };
+            public State Next()             => this with { Index = Index + 1 };
+            public State Restart()          => this with { Index = 0, Result = 0, Instructions = InitialInstructions };
+            public State Fix(int index)     => this with { Instructions = Instructions.Select((inst, i) => i == index ? inst.Fix() : inst).ToImmutableList(), FixedIndices = FixedIndices.Add(index) };
+            public State MarkItDone()       => this with { Instructions = Instructions.Select((inst, i) => Index == i ? inst.Done() : inst).ToImmutableList() };
+            public State NextFix()          => Instructions.FindIndex(FixedIndices.Max() + 1, i => i.Action is "jmp" or "nop" && i.Value != 0).Apply(Restart().Fix);
 
             public static State Init(IEnumerable<Instruction> instructions) =>
                 new(
-                Instructions: instructions.ToImmutableList(),
-                Result: 0,
-                Index: 0,
-                FixedIndices: Lst(-1).ToImmutableList(),
-                InitialInstructions: instructions.ToImmutableList());
+                    Instructions: instructions.ToImmutableList(),
+                    Result: 0,
+                    Index: 0,
+                    FixedIndices: Lst(-1).ToImmutableList(),
+                    InitialInstructions: instructions.ToImmutableList());
         }
         private static (string, string) ParseLine(string line) => (line[..3], line[4..]);
         private static Instruction ToDomain((string action, string value) parsedData) =>
