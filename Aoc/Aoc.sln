@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoc.Day7", "Aoc.Day7\Aoc.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoc.Day8", "Aoc.Day8\Aoc.Day8.csproj", "{3C3F5684-832B-4805-B115-1D421F62E887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoc.Day9", "..\Aoc.Day9\Aoc.Day9.csproj", "{A5535586-C9C0-41A3-AA65-0CCEA066EC99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoc.Day9", "Aoc.Day9\Aoc.Day9.csproj", "{A5535586-C9C0-41A3-AA65-0CCEA066EC99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

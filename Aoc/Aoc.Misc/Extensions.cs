@@ -9,7 +9,7 @@ namespace Aoc.Misc
     public static class Extensions
     {
         public static B Apply<A, B>(this A source, Func<A, B> f) => f(source);
-        public static bool Apply<A>(this A source, Action<A> f) { f(source); return true; }
+        public static A Apply<A>(this A source, Action<A> f) { f(source); return source; }
         public static bool IsContainedIn<T>(this T candidate, IEnumerable<T> potentialContainer) => potentialContainer.Contains(candidate);
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> source) => source == null || source.Any() == false;
         public static A Log<A>(this A source) { Console.WriteLine(source); return source; }
