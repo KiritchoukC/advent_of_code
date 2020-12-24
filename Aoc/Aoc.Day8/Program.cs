@@ -5,14 +5,16 @@ namespace Aoc.Day8
 
     using Aoc.Misc;
 
+    using LanguageExt;
+
     class Program
     {
         static void Main(string[] _) =>
             "input.txt"
                 .Apply(Part1.Solve)
-                .Apply(Console.WriteLine)
+                .Printn()
                 .Apply(_ => "input.txt")
                 .Apply(Part2.Solve)
-                .Apply(Console.WriteLine);
+                .Printn();
     }
 }

@@ -11,10 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="input_test.txt">
+    <EmbeddedResource Include="input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="input.txt">
+    <EmbeddedResource Include="input_test.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -25,6 +25,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aoc.Misc\Aoc.Misc.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Program.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>
