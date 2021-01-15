@@ -54,33 +54,3 @@ namespace Aoc.Day10
 
     }
 }
-
-
-
-//public long getArrangements(List<Integer> inputs)
-//{
-//	if(inputs.size() == 1)
-//		return 1;
-
-//	long arrangements = 0;
-//	int index = 1;
-//	int current = inputs.get(0);
-//	while(inputs.size() > index && inputs.get(index) - current < 4)
-//	{
-//		List<Integer> subList = inputs.subList(index, inputs.size());
-//		String subListStr = Arrays.toString(subList.toArray(new Integer[0]));
-
-//		if(cache.containsKey(subListStr))
-//		{
-//			arrangements += cache.get(subListStr);
-//		}
-//		else
-//		{
-//			long subArrangements = getArrangements(subList);
-//			cache.put(subListStr, subArrangements);
-//			arrangements += subArrangements;
-//		}
-//		index++;
-//	}
-//	return arrangements;
-//}
